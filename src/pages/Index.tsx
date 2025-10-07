@@ -93,8 +93,8 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top Bar - Contact Info */}
+    <header>
+      {/* Top Bar - Contact Info (Not Fixed) */}
       <div className="bg-white py-3 hidden md:block border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div className="flex gap-8 items-center">
@@ -119,8 +119,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Main Header */}
-      <div className={`bg-[#f8f8f8] transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}>
+      {/* Main Header (Fixed) */}
+      <div className={`sticky top-0 z-50 bg-[#f8f8f8] transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}>
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
@@ -163,21 +163,26 @@ const Header = () => {
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            className="md:hidden bg-white border-t"
+            exit={{ opacity: 0, height: 0 }}
+            className="bg-white md:hidden"
           >
-            <div className="px-4 py-4 flex flex-col gap-4">
+            <nav className="flex flex-col py-4">
               {navLinks.map((link) => (
                 <a 
                   key={link.name}
                   href={link.href} 
-                  className="text-text-primary font-medium hover:text-primary transition-colors py-2"
+                  className="px-4 py-3 text-[#00a0df] font-bold hover:bg-gray-100 transition-colors uppercase"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
                 </a>
               ))}
-              <Button variant="solid" className="w-full justify-center">BOOK NOW</Button>
-            </div>
+              <div className="px-4 pt-4">
+                <button className="w-full bg-[#00a0df] text-white py-3 px-6 rounded-full font-poppins font-bold text-sm hover:bg-[#007ab3] transition-all duration-300 uppercase">
+                  BOOK NOW
+                </button>
+              </div>
+            </nav>
           </motion.div>
         )}
       </div>
