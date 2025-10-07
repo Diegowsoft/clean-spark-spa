@@ -8,7 +8,7 @@ import {
   FaBars, FaTimes, FaCheckCircle, FaShieldAlt, FaUsers, FaStar,
   FaHome, FaBuilding, FaArrowRight, FaClock,
   FaClipboardList, FaCalendar, FaBroom, FaThumbsUp, FaComments,
-  FaMapMarkerAlt
+  FaMapMarkerAlt, FaGoogle
 } from "react-icons/fa";
 import { useRef } from "react";
 
@@ -30,6 +30,7 @@ import statsBg from "@/assets/stats-bg.jpg";
 import googleGuaranteed from "@/assets/google-guaranteed.png";
 import fiveStars from "@/assets/5-stars.png";
 import logo from "@/assets/logo.png";
+import logoBandClean from "@/assets/logo-bandclean.png";
 
 // Button Component
 const Button = ({ children, variant = "solid", className = "", onClick }: any) => {
@@ -84,60 +85,73 @@ const Header = () => {
     { name: "HOME", href: "#home" },
     { name: "ABOUT", href: "#about" },
     { name: "SERVICES", href: "#services" },
-    { name: "PROCESS", href: "#process" },
-    { name: "CONTACT", href: "#contact" }
+    { name: "CHECKLIST", href: "#checklist" },
+    { name: "PORTFOLIO", href: "#portfolio" },
+    { name: "FAQS", href: "#faqs" },
+    { name: "CONTACT", href: "#contact" },
+    { name: "LOG IN", href: "#login" }
   ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top Bar - Hidden on mobile */}
-      <div className="bg-bg-light py-2 hidden md:block">
-        <div className="max-w-6xl mx-auto px-4 flex justify-between items-center text-sm">
-          <div className="flex gap-4 text-text-secondary">
-            <a href="tel:+1234567890" className="flex items-center gap-2 hover:text-primary transition-colors">
-              <FaPhone /> (123) 456-7890
+      {/* Top Bar - Contact Info */}
+      <div className="bg-white py-3 hidden md:block border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+          <div className="flex gap-8 items-center">
+            <a href="tel:+35699027897" className="flex items-center gap-2 text-text-secondary hover:text-primary transition-colors font-poppins text-sm">
+              <FaPhone className="text-primary" /> +35699027897
             </a>
-            <a href="mailto:info@bandclean.com" className="flex items-center gap-2 hover:text-primary transition-colors">
-              <FaEnvelope /> info@bandclean.com
+            <a href="mailto:Martina.florentin89@gmail.com" className="flex items-center gap-2 text-text-secondary hover:text-primary transition-colors font-poppins text-sm">
+              <FaEnvelope className="text-primary" /> Martina.florentin89@gmail.com
             </a>
           </div>
           <div className="flex gap-3">
-            <a href="#" className="text-text-secondary hover:text-primary transition-colors"><FaFacebookF /></a>
-            <a href="#" className="text-text-secondary hover:text-primary transition-colors"><FaTwitter /></a>
-            <a href="#" className="text-text-secondary hover:text-primary transition-colors"><FaInstagram /></a>
+            <a href="#" className="w-8 h-8 rounded-full bg-[#1877f2] text-white flex items-center justify-center hover:opacity-80 transition-opacity">
+              <FaFacebookF size={14} />
+            </a>
+            <a href="#" className="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center hover:opacity-80 transition-opacity">
+              <FaInstagram size={14} />
+            </a>
+            <a href="#" className="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center hover:opacity-80 transition-opacity">
+              <FaGoogle size={14} />
+            </a>
           </div>
         </div>
       </div>
 
       {/* Main Header */}
-      <div className={`bg-white transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}>
-        <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div className={`bg-[#f8f8f8] transition-all duration-300 ${isScrolled ? "shadow-md" : ""}`}>
+        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo */}
           <div className="flex items-center">
-            <img src={logo} alt="Band Clean" className="h-12 md:h-16 object-contain" />
+            <img src={logoBandClean} alt="Band Clean" className="h-12 md:h-14 object-contain" />
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-8">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name}
-                href={link.href} 
-                className="text-text-primary font-medium hover:text-primary transition-colors"
-              >
-                {link.name}
-              </a>
+          <nav className="hidden lg:flex gap-6 items-center font-poppins">
+            {navLinks.map((link, index) => (
+              <span key={link.name} className="flex items-center gap-6">
+                <a 
+                  href={link.href} 
+                  className="text-[#00a0df] font-bold text-sm hover:text-[#007ab3] transition-colors uppercase"
+                >
+                  {link.name}
+                </a>
+                {index < navLinks.length - 1 && <span className="text-gray-300">|</span>}
+              </span>
             ))}
           </nav>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button variant="solid">BOOK NOW</Button>
+            <button className="bg-[#00a0df] text-white py-3 px-6 rounded-full font-poppins font-bold text-sm hover:bg-[#007ab3] transition-all duration-300 uppercase">
+              BOOK NOW
+            </button>
           </div>
 
           {/* Mobile Menu Toggle */}
           <button 
-            className="md:hidden text-2xl text-text-primary"
+            className="lg:hidden text-2xl text-text-primary"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
@@ -826,7 +840,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Column 1 - Logo */}
           <div>
-            <img src={logo} alt="Band Clean" className="h-16 mb-4 brightness-0 invert" />
+            <img src={logoBandClean} alt="Band Clean" className="h-16 mb-4 brightness-0 invert" />
             <p className="text-white/70">
               Professional cleaning services you can trust. Making spaces shine since 2010.
             </p>
